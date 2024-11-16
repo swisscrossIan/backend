@@ -1,0 +1,1145 @@
+nohup: ignoring input
+Server is running on port 5000
+Received GET request for /api/active_resources
+Query result: [
+  {
+    resource_id: '13b035c0-852d-4b13-8315-67a6f1bf2158',
+    resource_name: 'Little Step-by-Step (1)',
+    asset_tag: '1047',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: '37c59005-72e3-4d37-ba71-d789858f31cf',
+    resource_name: 'Little Step-by-Step (2)',
+    asset_tag: '1295',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-11-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '489e4122-4f50-4377-aea4-ad109846b9d4',
+    resource_name: 'GoTalk4 (1)',
+    asset_tag: '1454',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-09-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '57d9177c-baeb-4672-80d0-0f01e1d4a62c',
+    resource_name: 'GoTalk4 (2)',
+    asset_tag: '1065',
+    current_status: 'missing',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a24a89a0-d0a6-472a-8035-4a3f114aa321',
+    resource_name: 'Gridpad13 (1)',
+    asset_tag: '1195',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a60f01d0-baa8-4b47-a88d-1afc84b79029',
+    resource_name: 'Gridpad13 (2)',
+    asset_tag: '1342',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'ed604786-a3e2-44a9-8f77-8faab60b609d',
+    resource_name: 'Mogo mounting kit',
+    asset_tag: '1386',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  }
+]
+Received GET request for /api/active_resources
+Query result: [
+  {
+    resource_id: '13b035c0-852d-4b13-8315-67a6f1bf2158',
+    resource_name: 'Little Step-by-Step (1)',
+    asset_tag: '1047',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: '37c59005-72e3-4d37-ba71-d789858f31cf',
+    resource_name: 'Little Step-by-Step (2)',
+    asset_tag: '1295',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-11-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '489e4122-4f50-4377-aea4-ad109846b9d4',
+    resource_name: 'GoTalk4 (1)',
+    asset_tag: '1454',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-09-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '57d9177c-baeb-4672-80d0-0f01e1d4a62c',
+    resource_name: 'GoTalk4 (2)',
+    asset_tag: '1065',
+    current_status: 'missing',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a24a89a0-d0a6-472a-8035-4a3f114aa321',
+    resource_name: 'Gridpad13 (1)',
+    asset_tag: '1195',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a60f01d0-baa8-4b47-a88d-1afc84b79029',
+    resource_name: 'Gridpad13 (2)',
+    asset_tag: '1342',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'ed604786-a3e2-44a9-8f77-8faab60b609d',
+    resource_name: 'Mogo mounting kit',
+    asset_tag: '1386',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  }
+]
+Received GET request for /api/active_resources
+Query result: [
+  {
+    resource_id: '13b035c0-852d-4b13-8315-67a6f1bf2158',
+    resource_name: 'Little Step-by-Step (1)',
+    asset_tag: '1047',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: '37c59005-72e3-4d37-ba71-d789858f31cf',
+    resource_name: 'Little Step-by-Step (2)',
+    asset_tag: '1295',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-11-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '489e4122-4f50-4377-aea4-ad109846b9d4',
+    resource_name: 'GoTalk4 (1)',
+    asset_tag: '1454',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-09-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '57d9177c-baeb-4672-80d0-0f01e1d4a62c',
+    resource_name: 'GoTalk4 (2)',
+    asset_tag: '1065',
+    current_status: 'missing',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a24a89a0-d0a6-472a-8035-4a3f114aa321',
+    resource_name: 'Gridpad13 (1)',
+    asset_tag: '1195',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a60f01d0-baa8-4b47-a88d-1afc84b79029',
+    resource_name: 'Gridpad13 (2)',
+    asset_tag: '1342',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'ed604786-a3e2-44a9-8f77-8faab60b609d',
+    resource_name: 'Mogo mounting kit',
+    asset_tag: '1386',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  }
+]
+Received GET request for /api/active_resources
+Query result: [
+  {
+    resource_id: '13b035c0-852d-4b13-8315-67a6f1bf2158',
+    resource_name: 'Little Step-by-Step (1)',
+    asset_tag: '1047',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: '37c59005-72e3-4d37-ba71-d789858f31cf',
+    resource_name: 'Little Step-by-Step (2)',
+    asset_tag: '1295',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-11-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '489e4122-4f50-4377-aea4-ad109846b9d4',
+    resource_name: 'GoTalk4 (1)',
+    asset_tag: '1454',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-09-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '57d9177c-baeb-4672-80d0-0f01e1d4a62c',
+    resource_name: 'GoTalk4 (2)',
+    asset_tag: '1065',
+    current_status: 'missing',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a24a89a0-d0a6-472a-8035-4a3f114aa321',
+    resource_name: 'Gridpad13 (1)',
+    asset_tag: '1195',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a60f01d0-baa8-4b47-a88d-1afc84b79029',
+    resource_name: 'Gridpad13 (2)',
+    asset_tag: '1342',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'ed604786-a3e2-44a9-8f77-8faab60b609d',
+    resource_name: 'Mogo mounting kit',
+    asset_tag: '1386',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  }
+]
+Received GET request for /api/active_resources
+Query result: [
+  {
+    resource_id: '13b035c0-852d-4b13-8315-67a6f1bf2158',
+    resource_name: 'Little Step-by-Step (1)',
+    asset_tag: '1047',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: '37c59005-72e3-4d37-ba71-d789858f31cf',
+    resource_name: 'Little Step-by-Step (2)',
+    asset_tag: '1295',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-11-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '489e4122-4f50-4377-aea4-ad109846b9d4',
+    resource_name: 'GoTalk4 (1)',
+    asset_tag: '1454',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-09-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '57d9177c-baeb-4672-80d0-0f01e1d4a62c',
+    resource_name: 'GoTalk4 (2)',
+    asset_tag: '1065',
+    current_status: 'missing',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a24a89a0-d0a6-472a-8035-4a3f114aa321',
+    resource_name: 'Gridpad13 (1)',
+    asset_tag: '1195',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a60f01d0-baa8-4b47-a88d-1afc84b79029',
+    resource_name: 'Gridpad13 (2)',
+    asset_tag: '1342',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'ed604786-a3e2-44a9-8f77-8faab60b609d',
+    resource_name: 'Mogo mounting kit',
+    asset_tag: '1386',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  }
+]
+Received GET request for /api/active_resources
+Query result: [
+  {
+    resource_id: '13b035c0-852d-4b13-8315-67a6f1bf2158',
+    resource_name: 'Little Step-by-Step (1)',
+    asset_tag: '1047',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: '37c59005-72e3-4d37-ba71-d789858f31cf',
+    resource_name: 'Little Step-by-Step (2)',
+    asset_tag: '1295',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-11-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '489e4122-4f50-4377-aea4-ad109846b9d4',
+    resource_name: 'GoTalk4 (1)',
+    asset_tag: '1454',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-09-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '57d9177c-baeb-4672-80d0-0f01e1d4a62c',
+    resource_name: 'GoTalk4 (2)',
+    asset_tag: '1065',
+    current_status: 'missing',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a24a89a0-d0a6-472a-8035-4a3f114aa321',
+    resource_name: 'Gridpad13 (1)',
+    asset_tag: '1195',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a60f01d0-baa8-4b47-a88d-1afc84b79029',
+    resource_name: 'Gridpad13 (2)',
+    asset_tag: '1342',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'ed604786-a3e2-44a9-8f77-8faab60b609d',
+    resource_name: 'Mogo mounting kit',
+    asset_tag: '1386',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  }
+]
+Received GET request for /api/active_resources
+Query result: [
+  {
+    resource_id: '13b035c0-852d-4b13-8315-67a6f1bf2158',
+    resource_name: 'Little Step-by-Step (1)',
+    asset_tag: '1047',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: '37c59005-72e3-4d37-ba71-d789858f31cf',
+    resource_name: 'Little Step-by-Step (2)',
+    asset_tag: '1295',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-11-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '489e4122-4f50-4377-aea4-ad109846b9d4',
+    resource_name: 'GoTalk4 (1)',
+    asset_tag: '1454',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-09-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '57d9177c-baeb-4672-80d0-0f01e1d4a62c',
+    resource_name: 'GoTalk4 (2)',
+    asset_tag: '1065',
+    current_status: 'missing',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a24a89a0-d0a6-472a-8035-4a3f114aa321',
+    resource_name: 'Gridpad13 (1)',
+    asset_tag: '1195',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a60f01d0-baa8-4b47-a88d-1afc84b79029',
+    resource_name: 'Gridpad13 (2)',
+    asset_tag: '1342',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'ed604786-a3e2-44a9-8f77-8faab60b609d',
+    resource_name: 'Mogo mounting kit',
+    asset_tag: '1386',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  }
+]
+Received GET request for /api/active_resources
+Query result: [
+  {
+    resource_id: '13b035c0-852d-4b13-8315-67a6f1bf2158',
+    resource_name: 'Little Step-by-Step (1)',
+    asset_tag: '1047',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: '37c59005-72e3-4d37-ba71-d789858f31cf',
+    resource_name: 'Little Step-by-Step (2)',
+    asset_tag: '1295',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-11-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '489e4122-4f50-4377-aea4-ad109846b9d4',
+    resource_name: 'GoTalk4 (1)',
+    asset_tag: '1454',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-09-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '57d9177c-baeb-4672-80d0-0f01e1d4a62c',
+    resource_name: 'GoTalk4 (2)',
+    asset_tag: '1065',
+    current_status: 'missing',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a24a89a0-d0a6-472a-8035-4a3f114aa321',
+    resource_name: 'Gridpad13 (1)',
+    asset_tag: '1195',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a60f01d0-baa8-4b47-a88d-1afc84b79029',
+    resource_name: 'Gridpad13 (2)',
+    asset_tag: '1342',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'ed604786-a3e2-44a9-8f77-8faab60b609d',
+    resource_name: 'Mogo mounting kit',
+    asset_tag: '1386',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  }
+]
+Received GET request for /api/active_resources
+Query result: [
+  {
+    resource_id: '13b035c0-852d-4b13-8315-67a6f1bf2158',
+    resource_name: 'Little Step-by-Step (1)',
+    asset_tag: '1047',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: '37c59005-72e3-4d37-ba71-d789858f31cf',
+    resource_name: 'Little Step-by-Step (2)',
+    asset_tag: '1295',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-11-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '489e4122-4f50-4377-aea4-ad109846b9d4',
+    resource_name: 'GoTalk4 (1)',
+    asset_tag: '1454',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-09-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '57d9177c-baeb-4672-80d0-0f01e1d4a62c',
+    resource_name: 'GoTalk4 (2)',
+    asset_tag: '1065',
+    current_status: 'missing',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a24a89a0-d0a6-472a-8035-4a3f114aa321',
+    resource_name: 'Gridpad13 (1)',
+    asset_tag: '1195',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a60f01d0-baa8-4b47-a88d-1afc84b79029',
+    resource_name: 'Gridpad13 (2)',
+    asset_tag: '1342',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'ed604786-a3e2-44a9-8f77-8faab60b609d',
+    resource_name: 'Mogo mounting kit',
+    asset_tag: '1386',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  }
+]
+Received GET request for /api/active_resources
+Query result: [
+  {
+    resource_id: '13b035c0-852d-4b13-8315-67a6f1bf2158',
+    resource_name: 'Little Step-by-Step (1)',
+    asset_tag: '1047',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: '37c59005-72e3-4d37-ba71-d789858f31cf',
+    resource_name: 'Little Step-by-Step (2)',
+    asset_tag: '1295',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-11-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '489e4122-4f50-4377-aea4-ad109846b9d4',
+    resource_name: 'GoTalk4 (1)',
+    asset_tag: '1454',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-09-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '57d9177c-baeb-4672-80d0-0f01e1d4a62c',
+    resource_name: 'GoTalk4 (2)',
+    asset_tag: '1065',
+    current_status: 'missing',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a24a89a0-d0a6-472a-8035-4a3f114aa321',
+    resource_name: 'Gridpad13 (1)',
+    asset_tag: '1195',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a60f01d0-baa8-4b47-a88d-1afc84b79029',
+    resource_name: 'Gridpad13 (2)',
+    asset_tag: '1342',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'ed604786-a3e2-44a9-8f77-8faab60b609d',
+    resource_name: 'Mogo mounting kit',
+    asset_tag: '1386',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  }
+]
+Received GET request for /api/active_resources
+Query result: [
+  {
+    resource_id: '13b035c0-852d-4b13-8315-67a6f1bf2158',
+    resource_name: 'Little Step-by-Step (1)',
+    asset_tag: '1047',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: '37c59005-72e3-4d37-ba71-d789858f31cf',
+    resource_name: 'Little Step-by-Step (2)',
+    asset_tag: '1295',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-11-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '489e4122-4f50-4377-aea4-ad109846b9d4',
+    resource_name: 'GoTalk4 (1)',
+    asset_tag: '1454',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-09-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '57d9177c-baeb-4672-80d0-0f01e1d4a62c',
+    resource_name: 'GoTalk4 (2)',
+    asset_tag: '1065',
+    current_status: 'missing',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a24a89a0-d0a6-472a-8035-4a3f114aa321',
+    resource_name: 'Gridpad13 (1)',
+    asset_tag: '1195',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a60f01d0-baa8-4b47-a88d-1afc84b79029',
+    resource_name: 'Gridpad13 (2)',
+    asset_tag: '1342',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'ed604786-a3e2-44a9-8f77-8faab60b609d',
+    resource_name: 'Mogo mounting kit',
+    asset_tag: '1386',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  }
+]
+Received GET request for /api/active_resources
+Query result: [
+  {
+    resource_id: '13b035c0-852d-4b13-8315-67a6f1bf2158',
+    resource_name: 'Little Step-by-Step (1)',
+    asset_tag: '1047',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: '37c59005-72e3-4d37-ba71-d789858f31cf',
+    resource_name: 'Little Step-by-Step (2)',
+    asset_tag: '1295',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-11-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '489e4122-4f50-4377-aea4-ad109846b9d4',
+    resource_name: 'GoTalk4 (1)',
+    asset_tag: '1454',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-09-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '57d9177c-baeb-4672-80d0-0f01e1d4a62c',
+    resource_name: 'GoTalk4 (2)',
+    asset_tag: '1065',
+    current_status: 'missing',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a24a89a0-d0a6-472a-8035-4a3f114aa321',
+    resource_name: 'Gridpad13 (1)',
+    asset_tag: '1195',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a60f01d0-baa8-4b47-a88d-1afc84b79029',
+    resource_name: 'Gridpad13 (2)',
+    asset_tag: '1342',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'ed604786-a3e2-44a9-8f77-8faab60b609d',
+    resource_name: 'Mogo mounting kit',
+    asset_tag: '1386',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  }
+]
+Received GET request for /api/active_resources
+Query result: [
+  {
+    resource_id: '13b035c0-852d-4b13-8315-67a6f1bf2158',
+    resource_name: 'Little Step-by-Step (1)',
+    asset_tag: '1047',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: '37c59005-72e3-4d37-ba71-d789858f31cf',
+    resource_name: 'Little Step-by-Step (2)',
+    asset_tag: '1295',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-11-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '489e4122-4f50-4377-aea4-ad109846b9d4',
+    resource_name: 'GoTalk4 (1)',
+    asset_tag: '1454',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-09-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '57d9177c-baeb-4672-80d0-0f01e1d4a62c',
+    resource_name: 'GoTalk4 (2)',
+    asset_tag: '1065',
+    current_status: 'missing',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a24a89a0-d0a6-472a-8035-4a3f114aa321',
+    resource_name: 'Gridpad13 (1)',
+    asset_tag: '1195',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a60f01d0-baa8-4b47-a88d-1afc84b79029',
+    resource_name: 'Gridpad13 (2)',
+    asset_tag: '1342',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'ed604786-a3e2-44a9-8f77-8faab60b609d',
+    resource_name: 'Mogo mounting kit',
+    asset_tag: '1386',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  }
+]
+Received GET request for /api/active_resources
+Query result: [
+  {
+    resource_id: '13b035c0-852d-4b13-8315-67a6f1bf2158',
+    resource_name: 'Little Step-by-Step (1)',
+    asset_tag: '1047',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: '37c59005-72e3-4d37-ba71-d789858f31cf',
+    resource_name: 'Little Step-by-Step (2)',
+    asset_tag: '1295',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-11-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '489e4122-4f50-4377-aea4-ad109846b9d4',
+    resource_name: 'GoTalk4 (1)',
+    asset_tag: '1454',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-09-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '57d9177c-baeb-4672-80d0-0f01e1d4a62c',
+    resource_name: 'GoTalk4 (2)',
+    asset_tag: '1065',
+    current_status: 'missing',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a24a89a0-d0a6-472a-8035-4a3f114aa321',
+    resource_name: 'Gridpad13 (1)',
+    asset_tag: '1195',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a60f01d0-baa8-4b47-a88d-1afc84b79029',
+    resource_name: 'Gridpad13 (2)',
+    asset_tag: '1342',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'ed604786-a3e2-44a9-8f77-8faab60b609d',
+    resource_name: 'Mogo mounting kit',
+    asset_tag: '1386',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  }
+]
+Received GET request for /api/active_resources
+Query result: [
+  {
+    resource_id: '13b035c0-852d-4b13-8315-67a6f1bf2158',
+    resource_name: 'Little Step-by-Step (1)',
+    asset_tag: '1047',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: '37c59005-72e3-4d37-ba71-d789858f31cf',
+    resource_name: 'Little Step-by-Step (2)',
+    asset_tag: '1295',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-11-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '489e4122-4f50-4377-aea4-ad109846b9d4',
+    resource_name: 'GoTalk4 (1)',
+    asset_tag: '1454',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-09-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '57d9177c-baeb-4672-80d0-0f01e1d4a62c',
+    resource_name: 'GoTalk4 (2)',
+    asset_tag: '1065',
+    current_status: 'missing',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a24a89a0-d0a6-472a-8035-4a3f114aa321',
+    resource_name: 'Gridpad13 (1)',
+    asset_tag: '1195',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a60f01d0-baa8-4b47-a88d-1afc84b79029',
+    resource_name: 'Gridpad13 (2)',
+    asset_tag: '1342',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'ed604786-a3e2-44a9-8f77-8faab60b609d',
+    resource_name: 'Mogo mounting kit',
+    asset_tag: '1386',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  }
+]
+Request received at /api/resource_repairs
+Request Body: {
+  resource_id: '489e4122-4f50-4377-aea4-ad109846b9d4',
+  repair_status: 'pending',
+  date_start: '2024-11-16',
+  date_end: null,
+  indeterminent: true,
+  user_send: 'unknown',
+  repair_notes: 'reqerqew'
+}
+Insert successful: {
+  repair_id: 'c2a76b14-eb18-4c94-abc8-53df1e181f9e',
+  resource_id: '489e4122-4f50-4377-aea4-ad109846b9d4',
+  repair_status: 'pending',
+  date_start: 2024-11-16T00:00:00.000Z,
+  date_end: null,
+  indeterminent: true,
+  user_send: 'unknown',
+  unique_location: null,
+  repair_notes: 'reqerqew'
+}
+Received GET request for /api/active_resources
+Query result: [
+  {
+    resource_id: '13b035c0-852d-4b13-8315-67a6f1bf2158',
+    resource_name: 'Little Step-by-Step (1)',
+    asset_tag: '1047',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: '37c59005-72e3-4d37-ba71-d789858f31cf',
+    resource_name: 'Little Step-by-Step (2)',
+    asset_tag: '1295',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-11-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '489e4122-4f50-4377-aea4-ad109846b9d4',
+    resource_name: 'GoTalk4 (1)',
+    asset_tag: '1454',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-09-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '57d9177c-baeb-4672-80d0-0f01e1d4a62c',
+    resource_name: 'GoTalk4 (2)',
+    asset_tag: '1065',
+    current_status: 'missing',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a24a89a0-d0a6-472a-8035-4a3f114aa321',
+    resource_name: 'Gridpad13 (1)',
+    asset_tag: '1195',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a60f01d0-baa8-4b47-a88d-1afc84b79029',
+    resource_name: 'Gridpad13 (2)',
+    asset_tag: '1342',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'ed604786-a3e2-44a9-8f77-8faab60b609d',
+    resource_name: 'Mogo mounting kit',
+    asset_tag: '1386',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  }
+]
+Received GET request for /api/active_resources
+Query result: [
+  {
+    resource_id: '13b035c0-852d-4b13-8315-67a6f1bf2158',
+    resource_name: 'Little Step-by-Step (1)',
+    asset_tag: '1047',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: '37c59005-72e3-4d37-ba71-d789858f31cf',
+    resource_name: 'Little Step-by-Step (2)',
+    asset_tag: '1295',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-11-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '489e4122-4f50-4377-aea4-ad109846b9d4',
+    resource_name: 'GoTalk4 (1)',
+    asset_tag: '1454',
+    current_status: 'on-loan',
+    current_user: 'bridges-admin',
+    date_out: 2024-09-01T00:00:00.000Z,
+    date_in: null
+  },
+  {
+    resource_id: '57d9177c-baeb-4672-80d0-0f01e1d4a62c',
+    resource_name: 'GoTalk4 (2)',
+    asset_tag: '1065',
+    current_status: 'missing',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a24a89a0-d0a6-472a-8035-4a3f114aa321',
+    resource_name: 'Gridpad13 (1)',
+    asset_tag: '1195',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'a60f01d0-baa8-4b47-a88d-1afc84b79029',
+    resource_name: 'Gridpad13 (2)',
+    asset_tag: '1342',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  },
+  {
+    resource_id: 'ed604786-a3e2-44a9-8f77-8faab60b609d',
+    resource_name: 'Mogo mounting kit',
+    asset_tag: '1386',
+    current_status: 'available',
+    current_user: 'bridges-admin',
+    date_out: null,
+    date_in: null
+  }
+]

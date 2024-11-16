@@ -1,0 +1,90 @@
+const express = require('express');
+const { Pool } = require('pg');
+const cors = require('cors');
+
+const app = express();
+app.use(cors({ origin: 'http://34.130.92.139' })); // Allow requests from your frontend
+app.use(express.json()); // Middleware to parse JSON bodies
+
+// Set up PostgreSQL connection
+const pool = new Pool({
+    user: 'bridges-admin',
+    host: 'localhost', // or your server's IP
+    database: 'bridges-postgres',
+    password: 'shamed-DISKS-simulate', // Replace XXXX with your actual password
+    port: 5432,
+});
+
+// Define route to fetch active resources
+app.get('/api/active_resources', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT * FROM active_resources');
+        res.json(result.rows);
+    } catch (error) {
+        console.error('Error fetching active resources:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+// Define route to handle repair submissions
+app.post('/api/resource_repairs', async (req, res) => {
+    const {
+        resource_id,
+        repair_status,
+        date_start,
+        date_end,
+        indeterminent,
+        user_send,
+        unique_location,
+        repair_notes,
+    } = req.body;
+
+    try {
+        const result = await pool.query(
+            `INSERT INTO resource_repairs (
+                resource_id, 
+                repair_status, 
+                date_start, 
+                date_end, 
+                indeterminent, 
+                user_send, 
+                unique_location, 
+                repair_notes
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
+            [
+                resource_id,
+                repair_status,
+                date_start,
+                date_end,
+                indeterminent,
+                user_send,
+                unique_location,
+                repair_notes,
+            ]
+        );
+        res.status(201).json(result.rows[0]); // Return the inserted row
+    } catch (error) {
+        console.error('Error inserting repair record:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+// Start the server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
+
+// Add logs to backend
+app.get('/api/active_resources', async (req, res) => {
+    console.log('Received GET request for /api/active_resources'); // Log when the route is hit
+    try {
+        const result = await pool.query('SELECT * FROM active_resources');
+        console.log('Query result:', result.rows); // Log the query result
+        res.json(result.rows);
+    } catch (error) {
+        console.error('Error fetching active resources:', error); // Log any errors
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+

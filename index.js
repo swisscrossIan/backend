@@ -1,0 +1,114 @@
+const express = require('express');
+const { Pool } = require('pg');
+const cors = require('cors');
+
+const app = express();
+app.use(cors({ origin: 'http://34.130.92.139' })); // Allow requests from your frontend
+app.use(express.json()); // Middleware to parse JSON bodies
+
+// Set up PostgreSQL connection
+const pool = new Pool({
+    user: 'bridges-admin',
+    host: 'localhost', // or your server's IP
+    database: 'bridges-postgres',
+    password: 'shamed-DISKS-simulate', // Replace XXXX with your actual password
+    port: 5432,
+});
+
+// Define route to fetch active resources
+app.get('/api/active_resources', async (req, res) => {
+    console.log('Received GET request for /api/active_resources'); // Log when the route is hit
+    try {
+        const result = await pool.query('SELECT * FROM active_resources');
+        console.log('Query result:', result.rows); // Log the query result
+        res.json(result.rows);
+    } catch (error) {
+        console.error('Error fetching active resources:', error); // Log any errors
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+// Define route to handle repair submissions
+app.post('/api/resource_repairs', async (req, res) => {
+    console.log('Request received at /api/resource_repairs'); // Debug log
+    console.log('Request Body:', req.body); // Log the request body
+
+    const {
+        resource_id,
+        repair_status,
+        date_start,
+        date_end,
+        indeterminent,
+        user_send,
+        repair_notes,
+    } = req.body;
+
+    // Validate required fields
+    if (!resource_id || !repair_status || !date_start || !user_send || !repair_notes) {
+        console.error('Validation Error: Missing required fields');
+        return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    try {
+        const result = await pool.query(
+            `INSERT INTO resource_repairs (
+                resource_id, 
+                repair_status, 
+                date_start, 
+                date_end, 
+                indeterminent, 
+                user_send, 
+                repair_notes
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+            [
+                resource_id,
+                repair_status,
+                date_start,
+                date_end,
+                indeterminent,
+                user_send,
+                repair_notes,
+            ]
+        );
+
+        console.log('Insert successful:', result.rows[0]); // Log the inserted row
+        res.status(201).json(result.rows[0]); // Return the inserted row
+    } catch (error) {
+        console.error('Database Error:', error); // Log the database error
+        res.status(500).json({ error: 'Internal server error', details: error.message });
+    }
+});
+
+// Define route to update resources
+app.put('/api/resources/:resourceId', async (req, res) => {
+    const { resourceId } = req.params;
+    const { current_status, current_user_name, date_out, date_in } = req.body;
+
+    try {
+        // Update the resource in the database
+        const query = `
+            UPDATE resources
+            SET current_status = $1, current_user_name = $2, date_out = $3, date_in = $4
+            WHERE resource_id = $5
+        `;
+        const values = [current_status, current_user_name, date_out, date_in, resourceId];
+        const result = await pool.query(query, values);
+
+        if (result.rowCount === 0) {
+            // No rows were updated, meaning the resourceId does not exist
+            return res.status(404).json({ error: 'Resource not found' });
+        }
+
+        console.log(`Resource ${resourceId} updated successfully`);
+        res.status(200).json({ message: 'Resource updated successfully.' });
+    } catch (error) {
+        console.error('Error updating resource:', error);
+        res.status(500).json({ error: 'Failed to update resource.' });
+    }
+});
+
+// Start the server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
