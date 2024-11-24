@@ -131,53 +131,54 @@ app.post('/api/locations_onloan', async (req, res) => {
     }
 });
 
-app.post('/api/audit_log_resources', async (req, res) => {
-    const {
-        resource_id,
-        current_user_id,
-        status_change,
-        date_out,
-        create_date,
-        audit_user,
-        audit_note
-    } = req.body;
+// //add row to old audit log
+// app.post('/api/audit_log_resources', async (req, res) => {
+//     const {
+//         resource_id,
+//         current_user_id,
+//         status_change,
+//         date_out,
+//         create_date,
+//         audit_user,
+//         audit_note
+//     } = req.body;
 
-    // Validate required fields
-    if (!resource_id || !create_date) {
-        return res.status(400).json({ error: "Missing required fields" });
-    }
+//     // Validate required fields
+//     if (!resource_id || !create_date) {
+//         return res.status(400).json({ error: "Missing required fields" });
+//     }
 
-    try {
-        const query = `
-            INSERT INTO audit_log_resources (
-                resource_id,
-                current_user_id,
-                status_change,
-                date_out,
-                create_date,
-                audit_user,
-                audit_note
-            ) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`;
-        const values = [
-            resource_id,
-            current_user_id || null, // Allow null for empty strings
-            status_change || null,   // Allow null for empty strings
-            date_out || null,        // Allow null for date_out
-            create_date || null,      // Allow null for empty strings,
-            audit_user || null,      // Allow null for empty strings
-            audit_note || null,      // Allow null for empty strings,
-        ];
+//     try {
+//         const query = `
+//             INSERT INTO audit_log_resources (
+//                 resource_id,
+//                 current_user_id,
+//                 status_change,
+//                 date_out,
+//                 create_date,
+//                 audit_user,
+//                 audit_note
+//             ) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`;
+//         const values = [
+//             resource_id,
+//             current_user_id || null, // Allow null for empty strings
+//             status_change || null,   // Allow null for empty strings
+//             date_out || null,        // Allow null for date_out
+//             create_date || null,      // Allow null for empty strings,
+//             audit_user || null,      // Allow null for empty strings
+//             audit_note || null,      // Allow null for empty strings,
+//         ];
 
-        console.log("Executing Query:", query);
-        console.log("With Values:", values);
+//         console.log("Executing Query:", query);
+//         console.log("With Values:", values);
 
-        const result = await pool.query(query, values);
-        res.status(201).json(result.rows[0]);
-    } catch (error) {
-        console.error("Database Error:", error);
-        res.status(500).json({ error: "Internal server error" });
-    }
-});
+//         const result = await pool.query(query, values);
+//         res.status(201).json(result.rows[0]);
+//     } catch (error) {
+//         console.error("Database Error:", error);
+//         res.status(500).json({ error: "Internal server error" });
+//     }
+// });
 
 // Start the server
 const PORT = process.env.PORT || 5000;
