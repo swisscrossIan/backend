@@ -3,13 +3,13 @@ const { Pool } = require('pg');
 const cors = require('cors');
 
 const app = express();
-app.use(cors({ origin: 'http://34.130.27.82' })); // Allow requests from your frontend
+app.use(cors({ origin: 'http://34.130.92.139' })); // Allow requests from your frontend
 app.use(express.json()); // Middleware to parse JSON bodies
 
 // Set up PostgreSQL connection
 const pool = new Pool({
     user: 'bridges-admin',
-    host: '0.0.0.0', // or your server's IP
+    host: 'localhost', // or your server's IP
     database: 'bridges-postgres',
     password: 'shamed-DISKS-simulate', // Replace XXXX with your actual password
     port: 5432,
@@ -107,23 +107,21 @@ app.put('/api/resources/:resourceId', async (req, res) => {
     }
 });
 
+//define locations
 app.post('/api/locations_onloan', async (req, res) => {
-    const { resource_id, location_description, user_id, create_date, active } = req.body;
+    const { location_id, resource_id, loan_date } = req.body;
 
-    // Validate required fields
-    if (!resource_id || !location_description || !user_id || !create_date) {
+    if (!location_id || !resource_id || !loan_date) {
         return res.status(400).json({ error: 'Missing required fields' });
     }
 
     try {
-        // Insert data into the locations_onloan table
         const result = await pool.query(
-            `INSERT INTO locations_onloan (resource_id, location_description, user_id, create_date, active)
-             VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-            [resource_id, location_description, user_id, create_date, active]
+            `INSERT INTO locations_onloan (location_id, resource_id, loan_date)
+             VALUES ($1, $2, $3) RETURNING *`,
+            [location_id, resource_id, loan_date]
         );
 
-        // Return the newly created row
         res.status(201).json(result.rows[0]);
     } catch (error) {
         console.error('Error adding location on loan:', error);
@@ -131,56 +129,29 @@ app.post('/api/locations_onloan', async (req, res) => {
     }
 });
 
-app.post('/api/audit_log_resources', async (req, res) => {
-    const {
-        resource_id,
-        current_user_id,
-        status_change,
-        date_out,
-        create_date,
-        audit_user,
-        audit_note
-    } = req.body;
-
-    // Validate required fields
-    if (!resource_id || !create_date) {
-        return res.status(400).json({ error: "Missing required fields" });
-    }
-
-    try {
-        const query = `
-            INSERT INTO audit_log_resources (
-                resource_id,
-                current_user_id,
-                status_change,
-                date_out,
-                create_date,
-                audit_user,
-                audit_note
-            ) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`;
-        const values = [
-            resource_id,
-            current_user_id || null, // Allow null for empty strings
-            status_change || null,   // Allow null for empty strings
-            date_out || null,        // Allow null for date_out
-            create_date || null,      // Allow null for empty strings,
-            audit_user || null,      // Allow null for empty strings
-            audit_note || null,      // Allow null for empty strings,
-        ];
-
-        console.log("Executing Query:", query);
-        console.log("With Values:", values);
-
-        const result = await pool.query(query, values);
-        res.status(201).json(result.rows[0]);
-    } catch (error) {
-        console.error("Database Error:", error);
-        res.status(500).json({ error: "Internal server error" });
-    }
-});
-
 // Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
+});
+//define locations
+app.post('/api/locations_onloan', async (req, res) => {
+    const { location_id, resource_id, loan_date } = req.body;
+
+    if (!location_id || !resource_id || !loan_date) {
+        return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    try {
+        const result = await pool.query(
+            `INSERT INTO locations_onloan (location_id, resource_id, loan_date)
+             VALUES ($1, $2, $3) RETURNING *`,
+            [location_id, resource_id, loan_date]
+        );
+
+        res.status(201).json(result.rows[0]);
+    } catch (error) {
+        console.error('Error adding location on loan:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 });
