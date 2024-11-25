@@ -107,6 +107,7 @@ app.put('/api/resources/:resourceId', async (req, res) => {
     }
 });
 
+// endpoint for on-loan function
 app.post('/api/locations_onloan', async (req, res) => {
     const { resource_id, location_description, user_id, create_date, active } = req.body;
 
@@ -128,6 +129,23 @@ app.post('/api/locations_onloan', async (req, res) => {
     } catch (error) {
         console.error('Error adding location on loan:', error);
         res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+// Endpoint to add a resource note
+app.post('/api/resource_notes', async (req, res) => {
+    const { resource_id, note, create_date, user_id } = req.body;
+
+    try {
+        const result = await pool.query(
+            `INSERT INTO resource_notes (resource_id, note, create_date, user_id) 
+             VALUES ($1, $2, $3, $4) RETURNING *`,
+            [resource_id, note, create_date, user_id]
+        );
+        res.status(201).json(result.rows[0]);
+    } catch (error) {
+        console.error("Error adding resource note:", error);
+        res.status(500).json({ error: "Failed to add resource note" });
     }
 });
 
