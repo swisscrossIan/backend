@@ -148,6 +148,20 @@ app.post('/api/resource_notes', async (req, res) => {
         res.status(500).json({ error: "Failed to add resource note" });
     }
 });
+// endpoint to fetch bins filtered by location_id
+app.get("/api/active_bins", async (req, res) => {
+    const { location_id } = req.query;
+    try {
+        const result = await pool.query(
+            "SELECT * FROM active_bins WHERE location_id = $1",
+            [location_id]
+        );
+        res.json(result.rows);
+    } catch (error) {
+        console.error("Error fetching bins:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
 
 // //add row to old audit log
 // app.post('/api/audit_log_resources', async (req, res) => {
