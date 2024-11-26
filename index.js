@@ -107,7 +107,32 @@ app.put('/api/resources/:resourceId', async (req, res) => {
     }
 });
 
-app.post("/api/locations_onloan", async (req, res) => {
+app.post("/api/locations_onloan/take", async (req, res) => {
+    const { location_description, user_id, create_date, resource_id, active } = req.body;
+
+    if (!location_description || !user_id || !create_date || !resource_id) {
+        return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    try {
+        const result = await pool.query(
+            `INSERT INTO locations_onloan (
+                location_description,
+                user_id,
+                create_date,
+                resource_id,
+                active
+            ) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+            [location_description, user_id, create_date, resource_id, active]
+        );
+        res.status(201).json(result.rows[0]);
+    } catch (error) {
+        console.error("Error processing loan:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+app.post("/api/locations_onloan/return", async (req, res) => {
     const {
         location_description,
         user_id,
@@ -125,12 +150,12 @@ app.post("/api/locations_onloan", async (req, res) => {
     try {
         const result = await pool.query(
             `INSERT INTO locations_onloan (
-                location_description, 
-                user_id, 
-                create_date, 
-                resource_id, 
-                active, 
-                location_id, 
+                location_description,
+                user_id,
+                create_date,
+                resource_id,
+                active,
+                location_id,
                 bin_id
             ) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
             [
@@ -140,12 +165,12 @@ app.post("/api/locations_onloan", async (req, res) => {
                 resource_id,
                 active,
                 location_id,
-                bin_id || null, // Ensure null handling
+                bin_id || null,
             ]
         );
         res.status(201).json(result.rows[0]);
     } catch (error) {
-        console.error("Error adding location on loan:", error);
+        console.error("Error processing return:", error);
         res.status(500).json({ error: "Internal server error" });
     }
 });
