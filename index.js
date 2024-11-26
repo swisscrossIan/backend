@@ -107,43 +107,46 @@ app.put('/api/resources/:resourceId', async (req, res) => {
     }
 });
 
-// endpoint for on-loan function
-app.post('/api/locations_onloan', async (req, res) => {
-    const { resource_id, location_description, user_id, create_date, active } = req.body;
+app.post("/api/locations_onloan", async (req, res) => {
+    const {
+        location_description,
+        user_id,
+        create_date,
+        resource_id,
+        active,
+        location_id,
+        bin_id,
+    } = req.body;
 
-    // Validate required fields
-    if (!resource_id || !location_description || !user_id || !create_date) {
-        return res.status(400).json({ error: 'Missing required fields' });
+    if (!location_description || !user_id || !create_date || !resource_id || !location_id) {
+        return res.status(400).json({ error: "Missing required fields" });
     }
 
     try {
-        // Insert data into the locations_onloan table
         const result = await pool.query(
             `INSERT INTO locations_onloan (
-                 location_description, 
-                 user_id, 
-                 create_date, 
-                 resource_id, 
-                 active, 
-                 location_id, 
-                 bin_id
-             ) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+                location_description, 
+                user_id, 
+                create_date, 
+                resource_id, 
+                active, 
+                location_id, 
+                bin_id
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
             [
-                location_description, // $1
-                user_id,              // $2
-                create_date,          // $3
-                resource_id,          // $4
-                active,               // $5
-                location_id,          // $6
-                bin_id || null,       // $7
+                location_description,
+                user_id,
+                create_date,
+                resource_id,
+                active,
+                location_id,
+                bin_id || null, // Ensure null handling
             ]
         );
-
-        // Return the newly created row
         res.status(201).json(result.rows[0]);
     } catch (error) {
-        console.error('Error adding location on loan:', error);
-        res.status(500).json({ error: 'Internal server error' });
+        console.error("Error adding location on loan:", error);
+        res.status(500).json({ error: "Internal server error" });
     }
 });
 
