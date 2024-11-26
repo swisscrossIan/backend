@@ -179,17 +179,24 @@ app.get("/api/active_locations", async (req, res) => {
 // endpoint to fetch bins filtered by location_id
 app.get("/api/active_bins", async (req, res) => {
     const { location_id } = req.query;
+
+    if (!location_id) {
+        return res.status(400).json({ error: "Missing location_id parameter" });
+    }
+
     try {
         const result = await pool.query(
             "SELECT * FROM active_bins WHERE location_id = $1",
             [location_id]
         );
+        console.log("Bins fetched for location_id:", location_id, result.rows); // Debug log
         res.json(result.rows);
     } catch (error) {
         console.error("Error fetching bins:", error);
         res.status(500).json({ error: "Internal server error" });
     }
 });
+
 
 // //add row to old audit log
 // app.post('/api/audit_log_resources', async (req, res) => {
