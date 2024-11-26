@@ -148,6 +148,19 @@ app.post('/api/resource_notes', async (req, res) => {
         res.status(500).json({ error: "Failed to add resource note" });
     }
 });
+
+// Endpoint to fetch active locations
+app.get("/api/active_locations", async (req, res) => {
+    try {
+        const result = await pool.query("SELECT * FROM active_locations");
+        res.json(result.rows);
+    } catch (error) {
+        console.error("Error fetching active locations:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+
 // endpoint to fetch bins filtered by location_id
 app.get("/api/active_bins", async (req, res) => {
     const { location_id } = req.query;
