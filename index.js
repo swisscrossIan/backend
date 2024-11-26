@@ -119,9 +119,24 @@ app.post('/api/locations_onloan', async (req, res) => {
     try {
         // Insert data into the locations_onloan table
         const result = await pool.query(
-            `INSERT INTO locations_onloan (resource_id, location_description, user_id, create_date, active)
-             VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-            [resource_id, location_description, user_id, create_date, active]
+            `INSERT INTO locations_onloan (
+                 location_description, 
+                 user_id, 
+                 create_date, 
+                 resource_id, 
+                 active, 
+                 location_id, 
+                 bin_id
+             ) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+            [
+                location_description, // $1
+                user_id,              // $2
+                create_date,          // $3
+                resource_id,          // $4
+                active,               // $5
+                location_id,          // $6
+                bin_id || null,       // $7
+            ]
         );
 
         // Return the newly created row
