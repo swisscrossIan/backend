@@ -2,20 +2,13 @@ const express = require('express');
 const { Pool } = require('pg');
 const cors = require('cors');
 
-const app = express();
+// Allow requests from your frontend domain
 app.use(cors({
-    origin: function (origin, callback) {
-        const allowedOrigins = [
-            'http://34.130.27.82',
-            'http://leannesapp.surgicaldives.org'
-        ];
-        if (allowedOrigins.includes(origin) || !origin) {
-            callback(null, origin);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    }
+    origin: 'https://leannesapp.surgicaldives.org',
+    methods: 'GET,POST,PUT,DELETE',
+    allowedHeaders: 'Content-Type',
 }));
+
 app.use(express.json()); // Middleware to parse JSON bodies
 
 // Set up PostgreSQL connection
