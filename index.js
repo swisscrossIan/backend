@@ -3,7 +3,19 @@ const { Pool } = require('pg');
 const cors = require('cors');
 
 const app = express();
-app.use(cors({ origin: 'http://34.130.27.82' })); // Allow requests from your frontend
+app.use(cors({
+    origin: function (origin, callback) {
+        const allowedOrigins = [
+            'http://34.130.27.82',
+            'http://leannesapp.surgicaldives.org'
+        ];
+        if (allowedOrigins.includes(origin) || !origin) {
+            callback(null, origin);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
+}));
 app.use(express.json()); // Middleware to parse JSON bodies
 
 // Set up PostgreSQL connection
@@ -132,6 +144,7 @@ app.post("/api/locations_onloan/take", async (req, res) => {
     }
 });
 
+//on-loan locations
 app.post("/api/locations_onloan/return", async (req, res) => {
     const {
         location_description,
