@@ -287,3 +287,34 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
+//check if user is in the postgres user table
+app.post("/api/authorize", async (req, res) => {
+    const { email } = req.body; // Extract email from request body
+
+    try {
+        const result = await pool.query(
+            "SELECT username, user_role, active FROM users WHERE useremail = $1",
+            [email]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(403).json({ error: "Access denied. User not found." });
+        }
+
+        const user = result.rows[0];
+        if (!user.active) {
+            return res.status(403).json({ error: "Access denied. User is inactive." });
+        }
+
+        res.status(200).json({
+            username: user.username,
+            role: user.user_role,
+            active: user.active,
+        });
+    } catch (error) {
+        console.error("Error authorizing user:", error);
+        res.status(500).json({ error: "Internal server error." });
+    }
+});
+
