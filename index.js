@@ -290,7 +290,7 @@ app.listen(PORT, () => {
 
 //check if user is in the postgres user table
 app.post("/api/authorize", async (req, res) => {
-    const { email } = req.body; // Extract email from request body
+    const { email } = req.body; // Email is sent from the frontend after successful OAuth login
 
     try {
         const result = await pool.query(
@@ -299,22 +299,25 @@ app.post("/api/authorize", async (req, res) => {
         );
 
         if (result.rows.length === 0) {
+            // User not found in the database
             return res.status(403).json({ error: "Access denied. User not found." });
         }
 
         const user = result.rows[0];
         if (!user.active) {
+            // User exists but is inactive
             return res.status(403).json({ error: "Access denied. User is inactive." });
         }
 
+        // User is authorized
         res.status(200).json({
             username: user.username,
             role: user.user_role,
-            active: user.active,
         });
     } catch (error) {
-        console.error("Error authorizing user:", error);
+        console.error("Error during authorization:", error);
         res.status(500).json({ error: "Internal server error." });
     }
 });
+
 
