@@ -344,6 +344,7 @@ app.post("/api/resource_requests", async (req, res) => {
     const { resources, user_request, date_start, date_end, last_updated_by } = req.body;
 
     try {
+        console.log("Request payload:", req.body); // Log the incoming payload
         const client = await pool.connect();
 
         // Insert request
@@ -352,10 +353,12 @@ app.post("/api/resource_requests", async (req, res) => {
              VALUES ($1, $2, $3, $4) RETURNING request_id`,
             [user_request, date_start, date_end, last_updated_by]
         );
+        console.log("Inserted into resource_requests:", requestResult.rows);
         const requestId = requestResult.rows[0].request_id;
 
         // Associate resources with request
         for (const resourceId of resources) {
+            console.log("Inserting resource into request_resources:", resourceId);
             await client.query(
                 `INSERT INTO request_resources (request_id, resource_id) VALUES ($1, $2)`,
                 [requestId, resourceId]
