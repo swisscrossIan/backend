@@ -88,16 +88,20 @@ app.post('/api/resource_repairs', async (req, res) => {
 // Define route to update resources
 app.put('/api/resources/:resourceId', async (req, res) => {
     const { resourceId } = req.params;
-    const { current_status, current_user_name, date_out, date_in } = req.body;
+    const { current_status, current_user_name, date_out, date_in, last_updated_by } = req.body;
 
     try {
         // Update the resource in the database
         const query = `
             UPDATE resources
-            SET current_status = $1, current_user_name = $2, date_out = $3, date_in = $4
-            WHERE resource_id = $5
+            SET current_status = $1, 
+                current_user_name = $2, 
+                date_out = $3, 
+                date_in = $4, 
+                last_updated_by = $5
+            WHERE resource_id = $6
         `;
-        const values = [current_status, current_user_name, date_out, date_in, resourceId];
+        const values = [current_status, current_user_name, date_out, date_in, last_updated_by, resourceId];
         const result = await pool.query(query, values);
 
         if (result.rowCount === 0) {
@@ -105,7 +109,7 @@ app.put('/api/resources/:resourceId', async (req, res) => {
             return res.status(404).json({ error: 'Resource not found' });
         }
 
-        console.log(`Resource ${resourceId} updated successfully`);
+        console.log(`Resource ${resourceId} updated successfully by ${last_updated_by}`);
         res.status(200).json({ message: 'Resource updated successfully.' });
     } catch (error) {
         console.error('Error updating resource:', error);
@@ -113,6 +117,7 @@ app.put('/api/resources/:resourceId', async (req, res) => {
     }
 });
 
+//update locations from take Modal
 app.post("/api/locations_onloan/take", async (req, res) => {
     const { location_description, user_id, create_date, resource_id, active } = req.body;
 
