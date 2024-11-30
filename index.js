@@ -341,36 +341,35 @@ app.get("/api/active_users", async (req, res) => {
 
 //post reserve requests
 app.post("/api/resource_requests", async (req, res) => {
-    const { resources, user_request, date_start, date_end, last_updated_by } = req.body;
+    const { resources, user_request, date_start, date_end, anytime, last_updated_by } = req.body;
 
     try {
-        console.log("Request payload:", req.body); // Log the incoming payload
         const client = await pool.connect();
 
-        // Insert request
-        const requestResult = await client.query(
-            `INSERT INTO resource_requests (user_request, date_start, date_end, last_updated_by)
-             VALUES ($1, $2, $3, $4) RETURNING request_id`,
-            [user_request, date_start, date_end, last_updated_by]
+        // Step 1: Create a new request_list
+        const listResult = await client.query(
+            `INSERT INTO request_list (user_request, date_start, date_end, anytime, last_updated_by)
+             VALUES ($1, $2, $3, $4, $5) RETURNING request_list_id`,
+            [user_request, date_start, date_end, anytime, last_updated_by]
         );
-        console.log("Inserted into resource_requests:", requestResult.rows);
-        const requestId = requestResult.rows[0].request_id;
+        const requestListId = listResult.rows[0].request_list_id;
+        console.log("Request list created with ID:", requestListId);
 
-        // Associate resources with request
+        // Step 2: Insert resource_requests for each resource
         for (const resourceId of resources) {
-            console.log("Inserting resource into request_resources:", resourceId);
-            console.log("Inserting resource:", resourceId); // Ensure resourceId is vali
+            console.log("Inserting resource into resource_requests:", resourceId);
             await client.query(
-                `INSERT INTO request_resources (request_id, resource_id) VALUES ($1, $2)`,
-                [requestId, resourceId]
+                `INSERT INTO resource_requests (request_id, resource_id, request_list_id, user_request, date_start, date_end, last_updated_by)
+                 VALUES (gen_random_uuid(), $1, $2, $3, $4, $5, $6)`,
+                [resourceId, requestListId, user_request, date_start, date_end, last_updated_by]
             );
         }
 
         client.release();
-        res.status(201).json({ message: "Request submitted successfully" });
+        res.status(201).json({ message: "Request submitted successfully", request_list_id: requestListId });
     } catch (error) {
-        console.error("Error creating request:", error);
-        res.status(500).json({ error: "Internal server error" });
+        console.error("Error creating request list:", error.stack);
+        res.status(500).json({ error: "Internal server error", details: error.message });
     }
 });
 
