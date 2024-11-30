@@ -328,6 +328,7 @@ app.post("/api/authorize", async (req, res) => {
     }
 });
 
+//get active users
 app.get("/api/active_users", async (req, res) => {
     try {
         const result = await pool.query("SELECT username FROM active_users");
@@ -337,5 +338,37 @@ app.get("/api/active_users", async (req, res) => {
         res.status(500).json({ error: "Failed to fetch active users." });
     }
 });
+
+//post reserve requests
+app.post("/api/resource_requests", async (req, res) => {
+    const { resources, user_request, date_start, date_end, last_updated_by } = req.body;
+
+    try {
+        const client = await pool.connect();
+
+        // Insert request
+        const requestResult = await client.query(
+            `INSERT INTO resource_requests (user_request, date_start, date_end, last_updated_by)
+             VALUES ($1, $2, $3, $4) RETURNING request_id`,
+            [user_request, date_start, date_end, last_updated_by]
+        );
+        const requestId = requestResult.rows[0].request_id;
+
+        // Associate resources with request
+        for (const resourceId of resources) {
+            await client.query(
+                `INSERT INTO request_resources (request_id, resource_id) VALUES ($1, $2)`,
+                [requestId, resourceId]
+            );
+        }
+
+        client.release();
+        res.status(201).json({ message: "Request submitted successfully" });
+    } catch (error) {
+        console.error("Error creating request:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
 
 
