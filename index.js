@@ -89,7 +89,8 @@ app.post('/api/resource_repairs', async (req, res) => {
 app.put('/api/resources/:resourceId', async (req, res) => {
     const { resourceId } = req.params;
     const { current_status, current_user_name, date_out, date_in, last_updated_by} = req.body;
-
+   
+    console.log("Received payload:", req.body); 
     console.log("last_updated_by received:", last_updated_by); // Add this log
 
     try {
