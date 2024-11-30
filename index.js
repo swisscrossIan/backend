@@ -88,7 +88,7 @@ app.post('/api/resource_repairs', async (req, res) => {
 // Define route to update resources
 app.put('/api/resources/:resourceId', async (req, res) => {
     const { resourceId } = req.params;
-    const { current_status, current_user_name, date_out, date_in, last_updated_by } = req.body;
+    const { current_status, current_user_name, date_out, date_in, last_updated_by} = req.body;
 
     console.log("last_updated_by received:", last_updated_by); // Add this log
 
