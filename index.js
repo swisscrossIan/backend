@@ -359,6 +359,7 @@ app.post("/api/resource_requests", async (req, res) => {
         // Associate resources with request
         for (const resourceId of resources) {
             console.log("Inserting resource into request_resources:", resourceId);
+            console.log("Inserting resource:", resourceId); // Ensure resourceId is vali
             await client.query(
                 `INSERT INTO request_resources (request_id, resource_id) VALUES ($1, $2)`,
                 [requestId, resourceId]
