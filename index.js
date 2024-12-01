@@ -85,6 +85,17 @@ app.post('/api/resource_repairs', async (req, res) => {
     }
 });
 
+// Define route to get resources
+app.get("/api/resources", async (req, res) => {
+    try {
+        const result = await pool.query("SELECT resource_name, asset_tag, status FROM resources");
+        res.json(result.rows);
+    } catch (error) {
+        console.error("Error fetching resources:", error);
+        res.status(500).send("Server error");
+    }
+});
+
 // Define route to update resources
 app.put('/api/resources/:resourceId', async (req, res) => {
     const { resourceId } = req.params;
@@ -348,9 +359,9 @@ app.post("/api/resource_requests", async (req, res) => {
 
         // Step 1: Create a new request_list
         const listResult = await client.query(
-            `INSERT INTO request_list (user_request, date_start, date_end, anytime, last_updated_by)
-             VALUES ($1, $2, $3, $4, $5) RETURNING request_list_id`,
-            [user_request, date_start, date_end, anytime, last_updated_by]
+            `INSERT INTO request_list (user_request, date_start, date_end, anytime, last_updated_by, request_note)
+             VALUES ($1, $2, $3, $4, $5, $6) RETURNING request_list_id`,
+            [user_request, date_start, date_end, anytime, last_updated_by, request_note]
         );
         const requestListId = listResult.rows[0].request_list_id;
         console.log("Request list created with ID:", requestListId);
