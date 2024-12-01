@@ -88,7 +88,7 @@ app.post('/api/resource_repairs', async (req, res) => {
 // Define route to get resources
 app.get("/api/resources", async (req, res) => {
     try {
-        const result = await pool.query("SELECT resource_name, asset_tag, status FROM resources");
+        const result = await pool.query("SELECT resource_name, asset_tag, current_status FROM resources");
         res.json(result.rows);
     } catch (error) {
         console.error("Error fetching resources:", error);
