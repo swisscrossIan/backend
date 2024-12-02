@@ -352,7 +352,7 @@ app.get("/api/active_users", async (req, res) => {
 
 //post reserve requests
 app.post("/api/resource_requests", async (req, res) => {
-    const { resources, user_request, date_start, date_end, anytime, last_updated_by } = req.body;
+    const { resources, user_request, date_start, date_end, anytime, last_updated_by, request_note } = req.body;
 
     try {
         const client = await pool.connect();
@@ -383,6 +383,7 @@ app.post("/api/resource_requests", async (req, res) => {
         res.status(500).json({ error: "Internal server error", details: error.message });
     }
 });
+
 
 
 
