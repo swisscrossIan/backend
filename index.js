@@ -370,8 +370,8 @@ app.post("/api/resource_requests", async (req, res) => {
         for (const resourceId of resources) {
             console.log("Inserting resource into resource_requests:", resourceId);
             await client.query(
-                `INSERT INTO resource_requests (request_id, resource_id, request_list_id, last_updated_by)
-                 VALUES (gen_random_uuid(), $1, $2, $3)`,
+                `INSERT INTO resource_requests (resource_id, request_list_id, last_updated_by)
+                 VALUES ($1, $2, $3)`,
                 [resourceId, requestListId, last_updated_by]
             );
         }
