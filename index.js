@@ -384,6 +384,61 @@ app.post("/api/resource_requests", async (req, res) => {
     }
 });
 
+// edit resources
+app.put("/api/resources/:id", async (req, res) => {
+    const resourceId = req.params.id;
+    const {
+        resource_name,
+        asset_tag,
+        serial_number,
+        current_status,
+        current_user_name,
+        date_out,
+        date_in,
+        is_retired,
+    } = req.body;
+
+    try {
+        await pool.query(
+            `UPDATE resources
+             SET resource_name = $1,
+                 asset_tag = $2,
+                 serial_number = $3,
+                 current_status = $4,
+                 current_user_name = $5,
+                 date_out = $6,
+                 date_in = $7,
+                 is_retired = $8,
+                 last_updated = NOW()
+             WHERE resource_id = $9`,
+            [
+                resource_name,
+                asset_tag,
+                serial_number,
+                current_status,
+                current_user_name,
+                date_out,
+                date_in,
+                is_retired,
+                resourceId,
+            ]
+        );
+        res.sendStatus(200);
+    } catch (error) {
+        console.error("Error updating resource:", error);
+        res.status(500).json({ error: "Failed to update resource." });
+    }
+});
+
+/* Placeholder for dropdown endpoints
+app.get("/api/active_users", async (req, res) => {
+    // Fetch active users when ready
+});
+
+app.get("/api/active_statuses", async (req, res) => {
+    // Fetch active statuses when ready
+});
+*/
 
 
 
