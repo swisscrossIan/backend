@@ -88,13 +88,28 @@ app.post('/api/resource_repairs', async (req, res) => {
 // Define route to get resources
 app.get("/api/resources", async (req, res) => {
     try {
-        const result = await pool.query("SELECT resource_id, resource_name, asset_tag, current_status FROM resources");
+        const result = await pool.query(
+            `SELECT 
+                resource_id, 
+                resource_name, 
+                asset_tag, 
+                serial_number, 
+                current_status, 
+                current_user_name, 
+                date_out, 
+                date_in, 
+                is_retired, 
+                last_updated, 
+                last_updated_by
+            FROM resources`
+        );
         res.json(result.rows);
     } catch (error) {
         console.error("Error fetching resources:", error);
         res.status(500).send("Server error");
     }
 });
+
 
 // Define route to update resources
 app.put('/api/resources/:resourceId', async (req, res) => {
