@@ -400,28 +400,28 @@ app.post("/api/resource_requests", async (req, res) => {
 });
 
 // edit resources
-app.put("/api/resources/:id", async (req, res) => {
-    const resourceId = req.params.id;
-    const {
-        resource_name,
-    } = req.body;
+// app.put("/api/resources/:id", async (req, res) => {
+//     const resourceId = req.params.id;
+//     const {
+//         resource_name,
+//     } = req.body;
 
-    try {
-        await pool.query(
-            `UPDATE resources
-             SET resource_name = COALESCE(NULLIF($1, ''), resource_name),
-             WHERE resource_id = $9`,
-            [
-                resource_name,
-            ]
-        );
+//     try {
+//         await pool.query(
+//             `UPDATE resources
+//              SET resource_name = COALESCE(NULLIF($1, ''), resource_name),
+//              WHERE resource_id = $9`,
+//             [
+//                 resource_name,
+//             ]
+//         );
         
-        res.sendStatus(200);
-    } catch (error) {
-        console.error("Error updating resource:", error);
-        res.status(500).json({ error: "Failed to update resource." });
-    }
-});
+//         res.sendStatus(200);
+//     } catch (error) {
+//         console.error("Error updating resource:", error);
+//         res.status(500).json({ error: "Failed to update resource." });
+//     }
+// });
 
 /* Placeholder for dropdown endpoints
 app.get("/api/active_users", async (req, res) => {
