@@ -414,7 +414,7 @@ app.put("/api/resources/updateDetails/:id", async (req, res) => {
     } = req.body;
 
     try {
-        await pool.query(
+        const result = await pool.query(
             `UPDATE resources
              SET resource_name = COALESCE(NULLIF($1, ''), resource_name),
                  asset_tag = COALESCE(NULLIF($2, ''), asset_tag),
@@ -439,12 +439,18 @@ app.put("/api/resources/updateDetails/:id", async (req, res) => {
             ]
         );
 
-        res.sendStatus(200);
+        if (result.rowCount === 0) {
+            // No rows updated
+            return res.status(404).json({ error: "Resource not found or no changes made." });
+        }
+
+        res.status(200).json({ message: "Resource updated successfully." });
     } catch (error) {
         console.error("Error updating resource:", error);
         res.status(500).json({ error: "Failed to update resource." });
     }
 });
+
 
 
 /* Placeholder for dropdown endpoints
