@@ -416,11 +416,11 @@ app.put("/api/resources/:id", async (req, res) => {
     try {
         await pool.query(
             `UPDATE resources
-             SET resource_name = $1,
-                 asset_tag = $2,
-                 serial_number = $3,
+             SET resource_name = COALESCE(NULLIF($1, ''), resource_name),
+                 asset_tag = COALESCE(NULLIF($2, ''), asset_tag),
+                 serial_number = COALESCE(NULLIF($3, ''), serial_number),
                  current_status = $4,
-                 current_user_name = $5,
+                 current_user_name = COALESCE(NULLIF($5, ''), current_user_name),
                  date_out = $6,
                  date_in = $7,
                  is_retired = $8,
@@ -438,6 +438,7 @@ app.put("/api/resources/:id", async (req, res) => {
                 resourceId,
             ]
         );
+        
         res.sendStatus(200);
     } catch (error) {
         console.error("Error updating resource:", error);
