@@ -424,7 +424,6 @@ app.put("/api/resources/updateDetails/:id", async (req, res) => {
                  date_out = $6,
                  date_in = $7,
                  is_retired = $8,
-                 last_updated = NOW()
              WHERE resource_id = $9`,
             [
                 resource_name,
