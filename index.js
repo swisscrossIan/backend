@@ -404,37 +404,15 @@ app.put("/api/resources/:id", async (req, res) => {
     const resourceId = req.params.id;
     const {
         resource_name,
-        asset_tag,
-        serial_number,
-        current_status,
-        current_user_name,
-        date_out,
-        date_in,
-        is_retired,
     } = req.body;
 
     try {
         await pool.query(
             `UPDATE resources
              SET resource_name = COALESCE(NULLIF($1, ''), resource_name),
-                 asset_tag = COALESCE(NULLIF($2, ''), asset_tag),
-                 serial_number = COALESCE(NULLIF($3, ''), serial_number),
-                 current_status = $4,
-                 current_user_name = COALESCE(NULLIF($5, ''), current_user_name),
-                 date_out = $6,
-                 date_in = $7,
-                 is_retired = $8,
              WHERE resource_id = $9`,
             [
                 resource_name,
-                asset_tag,
-                serial_number,
-                current_status,
-                current_user_name,
-                date_out,
-                date_in,
-                is_retired,
-                resourceId,
             ]
         );
         
