@@ -365,6 +365,18 @@ app.get("/api/active_users", async (req, res) => {
     }
 });
 
+// Get active resource statuses
+app.get("/api/active_resource_statuses", async (req, res) => {
+    try {
+        const result = await pool.query("SELECT resource_status FROM active_resource_statuses");
+        res.json(result.rows);
+    } catch (error) {
+        console.error("Error fetching active resource statuses:", error);
+        res.status(500).json({ error: "Failed to fetch active resource statuses." });
+    }
+});
+
+
 //post reserve requests
 app.post("/api/resource_requests", async (req, res) => {
     const { resources, user_request, date_start, date_end, anytime, last_updated_by, request_note } = req.body;
@@ -423,7 +435,7 @@ app.put("/api/resources/updateDetails/:id", async (req, res) => {
                  current_user_name = COALESCE(NULLIF($5, ''), current_user_name),
                  date_out = $6,
                  date_in = $7,
-                 is_retired = $8,
+                 is_retired = $8
              WHERE resource_id = $9`,
             [
                 resource_name,
