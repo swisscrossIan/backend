@@ -513,3 +513,23 @@ app.post("/api/resources/new", async (req, res) => {
         res.status(500).json({ error: "Failed to add resource." });
     }
 });
+
+app.get("/api/track_locations", async (req, res) => {
+    const { resource_id } = req.query;
+
+    if (!resource_id) {
+        return res.status(400).json({ error: "Missing resource_id parameter" });
+    }
+
+    try {
+        const result = await pool.query(
+            "SELECT * FROM locations_onloan WHERE resource_id = $1",
+            [resource_id]
+        );
+        res.json(result.rows);
+    } catch (error) {
+        console.error("Error fetching track locations:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
