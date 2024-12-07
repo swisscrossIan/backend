@@ -423,6 +423,7 @@ app.put("/api/resources/updateDetails/:id", async (req, res) => {
         date_out,
         date_in,
         is_retired,
+        last_updated_by,
     } = req.body;
 
     try {
@@ -436,7 +437,8 @@ app.put("/api/resources/updateDetails/:id", async (req, res) => {
                  date_out = $6,
                  date_in = $7,
                  is_retired = $8
-             WHERE resource_id = $9`,
+                 last_updated_by = $9
+             WHERE resource_id = $10`,
             [
                 resource_name,
                 asset_tag,
@@ -446,6 +448,7 @@ app.put("/api/resources/updateDetails/:id", async (req, res) => {
                 date_out,
                 date_in,
                 is_retired,
+                last_updated_by,
                 resourceId,
             ]
         );
