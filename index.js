@@ -436,7 +436,7 @@ app.put("/api/resources/updateDetails/:id", async (req, res) => {
                  current_user_name = COALESCE(NULLIF($5, ''), current_user_name),
                  date_out = $6,
                  date_in = $7,
-                 is_retired = $8
+                 is_retired = $8,
                  last_updated_by = $9
              WHERE resource_id = $10`,
             [
