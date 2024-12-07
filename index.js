@@ -466,7 +466,7 @@ app.put("/api/resources/updateDetails/:id", async (req, res) => {
 });
 
 // Add a new resource
-app.post("/api/resources", async (req, res) => {
+app.post("/api/resources/new", async (req, res) => {
     const {
         resource_name,
         asset_tag,
