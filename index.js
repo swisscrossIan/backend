@@ -465,17 +465,48 @@ app.put("/api/resources/updateDetails/:id", async (req, res) => {
     }
 });
 
+// Add a new resource
+app.post("/api/resources", async (req, res) => {
+    const {
+        resource_name,
+        asset_tag,
+        serial_number,
+        current_status,
+        current_user_name,
+        date_out,
+        date_in,
+        is_retired,
+        last_updated_by,
+    } = req.body;
 
-
-/* Placeholder for dropdown endpoints
-app.get("/api/active_users", async (req, res) => {
-    // Fetch active users when ready
+    try {
+        const result = await pool.query(
+            `INSERT INTO resources (
+                resource_name,
+                asset_tag,
+                serial_number,
+                current_status,
+                current_user_name,
+                date_out,
+                date_in,
+                is_retired,
+                last_updated_by
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
+            [
+                resource_name,
+                asset_tag,
+                serial_number,
+                current_status,
+                current_user_name,
+                date_out || null,
+                date_in || null,
+                is_retired,
+                last_updated_by,
+            ]
+        );
+        res.status(201).json(result.rows[0]);
+    } catch (error) {
+        console.error("Error adding resource:", error);
+        res.status(500).json({ error: "Failed to add resource." });
+    }
 });
-
-app.get("/api/active_statuses", async (req, res) => {
-    // Fetch active statuses when ready
-});
-*/
-
-
-
