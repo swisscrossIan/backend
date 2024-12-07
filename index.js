@@ -181,7 +181,7 @@ app.post("/api/locations_onloan/return", async (req, res) => {
         resource_id,
         active,
         location_id,
-        bin_id,
+        bin_name,
     } = req.body;
 
     if (!location_description || !user_id || !create_date || !resource_id || !location_id) {
@@ -197,7 +197,7 @@ app.post("/api/locations_onloan/return", async (req, res) => {
                 resource_id,
                 active,
                 location_id,
-                bin_id
+                bin_name
             ) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
             [
                 location_description,
@@ -206,7 +206,7 @@ app.post("/api/locations_onloan/return", async (req, res) => {
                 resource_id,
                 active,
                 location_id,
-                bin_id || null,
+                bin_name || null,
             ]
         );
         res.status(201).json(result.rows[0]);
