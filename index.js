@@ -534,10 +534,20 @@ app.get("/api/track_locations", async (req, res) => {
 });
 
 app.get('/api/user_request_list', async (req, res) => {
-    const { user_id, resource_id } = req.query;
+    const { user_id: username, resource_id } = req.query; // Note: user_id is actually username here
 
     try {
-        // SQL query to retrieve the related request list
+        // Retrieve user_id from username
+        const userQuery = `SELECT user_id FROM users WHERE username = $1`;
+        const userResult = await pool.query(userQuery, [username]);
+        
+        if (userResult.rows.length === 0) {
+            return res.json([]); // No matching user
+        }
+
+        const userId = userResult.rows[0].user_id; // Extract user_id
+
+        // Query for the request list
         const query = `
             SELECT 
                 rl.request_list_id, 
@@ -557,10 +567,9 @@ app.get('/api/user_request_list', async (req, res) => {
             WHERE 
                 rl.user_id = $1 AND rr.resource_id = $2 AND rr.active = TRUE;
         `;
-        const result = await pool.query(query, [user_id, resource_id]);
+        const result = await pool.query(query, [userId, resource_id]);
 
-        // Send the results as JSON
-        res.json(result.rows);
+        res.json(result.rows); // Send the query result
     } catch (error) {
         console.error("Error fetching user request list:", error);
         res.status(500).json({ error: "Internal server error" });
