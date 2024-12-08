@@ -533,3 +533,38 @@ app.get("/api/track_locations", async (req, res) => {
     }
 });
 
+app.get('/api/user_request_list', async (req, res) => {
+    const { user_id, resource_id } = req.query;
+
+    try {
+        // SQL query to retrieve the related request list
+        const query = `
+            SELECT 
+                rl.request_list_id, 
+                rl.user_request, 
+                rl.date_start, 
+                rl.date_end, 
+                rl.anytime, 
+                rl.active AS list_active, 
+                rr.resource_id, 
+                rr.active AS item_active
+            FROM 
+                request_list rl
+            JOIN 
+                resource_requests rr 
+            ON 
+                rl.request_list_id = rr.request_list_id
+            WHERE 
+                rl.user_id = $1 AND rr.resource_id = $2 AND rr.active = TRUE;
+        `;
+        const result = await pool.query(query, [user_id, resource_id]);
+
+        // Send the results as JSON
+        res.json(result.rows);
+    } catch (error) {
+        console.error("Error fetching user request list:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+
