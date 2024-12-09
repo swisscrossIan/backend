@@ -576,15 +576,25 @@ app.get('/api/user_request_list', async (req, res) => {
     }
 });
 
-app.get('/active_resource_requests', async (req, res) => {
+app.get('/api/active_resource_requests', async (req, res) => {
     const { user_id, resource_id } = req.query;
 
     const query = `
-        SELECT rr.resource_id, rr.active AS item_active, rl.last_update, rl.active AS list_active, r.resource_name
-        FROM resource_requests rr
-        JOIN request_list rl ON rr.request_list_id = rl.request_list_id
-        JOIN resources r ON rr.resource_id = r.resource_id
-        WHERE rl.user_id = $1 AND rr.resource_id = $2 AND (rl.active = TRUE OR rr.active = TRUE)
+        SELECT 
+            arl.request_list_id,
+            arl.last_update,
+            arl.list_active,
+            arl.resource_id,
+            r.resource_name,
+            arl.item_active
+        FROM 
+            active_request_list arl
+        JOIN 
+            resources r ON arl.resource_id = r.resource_id
+        WHERE 
+            arl.user_id = $1 AND arl.resource_id = $2
+        ORDER BY 
+            arl.request_list_id, arl.resource_id;
     `;
 
     try {
@@ -595,6 +605,3 @@ app.get('/active_resource_requests', async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
-
-
-
