@@ -576,6 +576,7 @@ app.get('/api/user_request_list', async (req, res) => {
     }
 });
 
+//checking take against requests
 app.get('/api/active_resource_requests', async (req, res) => {
     const { user_id, resource_id } = req.query;
 
@@ -595,23 +596,25 @@ app.get('/api/active_resource_requests', async (req, res) => {
         }
     }
 
-    // Fetch active resource requests using finalUserId
+    // Query the underlying tables directly
     const query = `
         SELECT 
-            arl.request_list_id,
-            arl.last_update,
-            arl.list_active,
-            arl.resource_id,
-            r.resource_name,
-            arl.item_active
+            rl.request_list_id,
+            rl.last_update,
+            rl.active AS list_active,
+            rr.resource_id,
+            rr.active AS item_active,
+            r.resource_name
         FROM 
-            active_request_list arl
+            request_list rl
         JOIN 
-            resources r ON arl.resource_id = r.resource_id
+            resource_requests rr ON rl.request_list_id = rr.request_list_id
+        JOIN 
+            resources r ON rr.resource_id = r.resource_id
         WHERE 
-            arl.user_id = $1 AND arl.resource_id = $2
+            rl.user_id = $1 AND rr.resource_id = $2
         ORDER BY 
-            arl.request_list_id, arl.resource_id;
+            rl.request_list_id, rr.resource_id;
     `;
 
     try {
