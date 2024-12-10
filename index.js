@@ -613,10 +613,10 @@ app.get('/api/active_resource_requests', async (req, res) => {
         JOIN 
             resources r ON rr.resource_id = r.resource_id
         WHERE 
-            rl.user_id = $1 AND $2 IN (
-                SELECT resource_id
+            rl.user_id = $1 AND rl.request_list_id IN (
+                SELECT request_list_id
                 FROM resource_requests
-                WHERE request_list_id = rl.request_list_id
+                WHERE resource_id = $2
             )
         ORDER BY 
             rl.request_list_id, rr.resource_id;
@@ -631,4 +631,3 @@ app.get('/api/active_resource_requests', async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
-
