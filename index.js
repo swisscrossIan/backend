@@ -631,3 +631,33 @@ app.get('/api/active_resource_requests', async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
+
+app.put('/api/update_items_active', async (req, res) => {
+    const { updates } = req.body;
+
+    if (!Array.isArray(updates) || updates.length === 0) {
+        return res.status(400).json({ error: 'No updates provided.' });
+    }
+
+    try {
+        const query = `
+            UPDATE resource_requests
+            SET active = false
+            WHERE (request_list_id, resource_id) IN (
+                SELECT unnest(array[$1::uuid[]]),
+                       unnest(array[$2::uuid[]])
+            )
+        `;
+
+        const requestListIds = updates.map((u) => u.request_list_id);
+        const resourceIds = updates.map((u) => u.resource_id);
+
+        const result = await pool.query(query, [requestListIds, resourceIds]);
+
+        res.status(200).json({ message: `${result.rowCount} resources updated.` });
+    } catch (error) {
+        console.error('Error updating resources:', error);
+        res.status(500).json({ error: 'Failed to update resources.' });
+    }
+});
+
