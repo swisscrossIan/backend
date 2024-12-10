@@ -580,27 +580,28 @@ app.get('/api/user_request_list', async (req, res) => {
 app.get('/api/active_resource_requests', async (req, res) => {
     const { user_id, resource_id } = req.query;
 
-    // Lookup user_id if user_id is actually a username
+    // Lookup user_id if necessary
     let finalUserId = user_id; // Assume it's already a user_id
-    if (!user_id.match(/^[0-9a-fA-F-]{36}$/)) { // Check if it's a UUID
+    if (!user_id.match(/^[0-9a-fA-F-]{36}$/)) {
         try {
             const userQuery = `SELECT user_id FROM users WHERE username = $1 LIMIT 1;`;
-            const userResult = await pool.query(userQuery, [user_id]); // Lookup user_id
+            const userResult = await pool.query(userQuery, [user_id]);
             if (userResult.rows.length === 0) {
                 return res.status(404).json({ error: "User not found" });
             }
-            finalUserId = userResult.rows[0].user_id; // Map username to user_id
+            finalUserId = userResult.rows[0].user_id;
         } catch (error) {
             console.error("Error looking up user_id:", error);
             return res.status(500).json({ error: "Internal server error" });
         }
     }
 
-    // Query the underlying tables directly
     const query = `
         SELECT 
             rl.request_list_id,
             rl.last_update,
+            rl.date_start,
+            rl.date_end,
             rl.active AS list_active,
             rr.resource_id,
             rr.active AS item_active,
@@ -612,15 +613,19 @@ app.get('/api/active_resource_requests', async (req, res) => {
         JOIN 
             resources r ON rr.resource_id = r.resource_id
         WHERE 
-            rl.user_id = $1 AND rr.resource_id = $2
+            rl.user_id = $1 AND $2 IN (
+                SELECT resource_id
+                FROM resource_requests
+                WHERE request_list_id = rl.request_list_id
+            )
         ORDER BY 
             rl.request_list_id, rr.resource_id;
     `;
 
     try {
         const result = await pool.query(query, [finalUserId, resource_id]);
-        console.log("Query result:", result.rows); // Debug query results
-        res.json(result.rows); // Send query results to the frontend
+        console.log("Query result:", result.rows);
+        res.json(result.rows);
     } catch (error) {
         console.error("Error fetching active resource requests:", error);
         res.status(500).json({ error: "Internal server error" });
