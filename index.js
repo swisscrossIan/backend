@@ -635,29 +635,43 @@ app.get('/api/active_resource_requests', async (req, res) => {
 app.put('/api/update_items_active', async (req, res) => {
     const { updates } = req.body;
 
+    console.log("Received updates payload:", updates);
+
     if (!Array.isArray(updates) || updates.length === 0) {
+        console.error("No valid updates provided.");
         return res.status(400).json({ error: 'No updates provided.' });
     }
 
     try {
+        const requestListIds = updates.map((u) => u.request_list_id).filter(Boolean);
+        const resourceIds = updates.map((u) => u.resource_id).filter(Boolean);
+
+        // Add detailed logging
+        console.log("Payload validation:");
+        console.log("Updates:", updates); // Log the full updates array
+        console.log("Request List IDs:", requestListIds); // Log extracted request_list_ids
+        console.log("Resource IDs:", resourceIds); // Log extracted resource_ids
+
+        if (requestListIds.length === 0 || resourceIds.length === 0) {
+            console.error("Invalid UUIDs provided.");
+            return res.status(400).json({ error: 'Invalid UUIDs in updates.' });
+        }
+
         const query = `
             UPDATE resource_requests
             SET active = false
-            WHERE (request_list_id, resource_id) IN (
-                SELECT unnest(array[$1::uuid[]]),
-                       unnest(array[$2::uuid[]])
+            WHERE (request_list_id::uuid, resource_id::uuid) IN (
+                SELECT unnest($1::uuid[]),
+                       unnest($2::uuid[])
             )
         `;
 
-        const requestListIds = updates.map((u) => u.request_list_id);
-        const resourceIds = updates.map((u) => u.resource_id);
-
         const result = await pool.query(query, [requestListIds, resourceIds]);
+        console.log("Query result:", result);
 
         res.status(200).json({ message: `${result.rowCount} resources updated.` });
     } catch (error) {
-        console.error('Error updating resources:', error);
+        console.error('Error executing update query:', error);
         res.status(500).json({ error: 'Failed to update resources.' });
     }
 });
-
