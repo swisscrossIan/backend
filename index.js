@@ -580,7 +580,6 @@ app.get('/api/user_request_list', async (req, res) => {
 app.get('/api/active_resource_requests', async (req, res) => {
     const { user_id, resource_id } = req.query;
 
-    // Lookup user_id if necessary
     let finalUserId = user_id; // Assume it's already a user_id
     if (!user_id.match(/^[0-9a-fA-F-]{36}$/)) {
         try {
@@ -613,18 +612,20 @@ app.get('/api/active_resource_requests', async (req, res) => {
         JOIN 
             resources r ON rr.resource_id = r.resource_id
         WHERE 
-            rl.user_id = $1 AND rl.request_list_id IN (
+            rl.user_id = $1
+            AND rr.active = TRUE
+            AND rl.request_list_id IN (
                 SELECT request_list_id
                 FROM resource_requests
                 WHERE resource_id = $2
+                  AND active = TRUE
             )
         ORDER BY 
-            rl.request_list_id, rr.resource_id;
+            rl.request_list_id DESC, rr.resource_id;
     `;
 
     try {
         const result = await pool.query(query, [finalUserId, resource_id]);
-        console.log("Query result:", result.rows);
         res.json(result.rows);
     } catch (error) {
         console.error("Error fetching active resource requests:", error);
@@ -632,6 +633,7 @@ app.get('/api/active_resource_requests', async (req, res) => {
     }
 });
 
+//update items taken
 app.put('/api/update_items_active', async (req, res) => {
     const { updates } = req.body;
 
