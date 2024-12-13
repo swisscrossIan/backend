@@ -694,3 +694,32 @@ app.put('/api/update_items_active', async (req, res) => {
         res.status(500).json({ error: 'Failed to update resources.' });
     }
 });
+
+app.post('/api/update_location', async (req, res) => {
+    const { resource_id, location_description, location_type, bin_name, last_updated_by } = req.body;
+
+    if (!resource_id || !location_description || !last_updated_by) {
+        return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    try {
+        const query = `
+            INSERT INTO locations_onloan (
+                resource_id, 
+                location_description, 
+                location_type, 
+                bin_name, 
+                last_updated_by
+            )
+            VALUES ($1, $2, $3, $4, $5)
+            RETURNING *`;
+        const values = [resource_id, location_description, location_type, bin_name || null, last_updated_by];
+
+        const result = await pool.query(query, values);
+
+        res.status(201).json(result.rows[0]);
+    } catch (error) {
+        console.error('Error updating location:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
