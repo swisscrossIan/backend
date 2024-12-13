@@ -660,12 +660,14 @@ app.put('/api/update_items_active', async (req, res) => {
         const query = `
         UPDATE resource_requests
         SET active = false
-        WHERE request_list_id::uuid = $1::uuid
-          AND resource_id::uuid = $2::uuid
+        WHERE (request_list_id::uuid = $1::uuid AND resource_id::uuid = $2::uuid)
+           OR (request_list_id::uuid = $3::uuid AND resource_id::uuid = $4::uuid)
     `;
-    const result = await pool.query(query, [requestListIds[0], resourceIds[0]]);
+    const result = await pool.query(query, [
+        requestListIds[0], resourceIds[0],
+        requestListIds[1], resourceIds[1]
+    ]);
     
-        console.log("Query result:", result);
 
         res.status(200).json({ message: `${result.rowCount} resources updated.` });
     } catch (error) {
