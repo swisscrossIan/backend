@@ -146,31 +146,48 @@ app.put('/api/resources/:resourceId', async (req, res) => {
     }
 });
 
-//update locations from take Modal
+// Update locations from take modal
 app.post("/api/locations_onloan/take", async (req, res) => {
-    const { location_description, user_id, create_date, resource_id, active } = req.body;
+    const { location_description, username, create_date, resource_id, active, last_updated_by } = req.body;
 
-    if (!location_description || !user_id || !create_date || !resource_id) {
+    if (!location_description || !username || !create_date || !resource_id || !last_updated_by) {
         return res.status(400).json({ error: "Missing required fields" });
     }
 
     try {
+        // Fetch user_id based on username
+        const userResult = await pool.query(
+            "SELECT user_id FROM users WHERE username = $1",
+            [username]
+        );
+
+        if (userResult.rows.length === 0) {
+            return res.status(404).json({ error: "User not found." });
+        }
+
+        const user_id = userResult.rows[0].user_id;
+
+        // Insert into locations_onloan with the fetched user_id
         const result = await pool.query(
             `INSERT INTO locations_onloan (
                 location_description,
                 user_id,
                 create_date,
                 resource_id,
-                active
-            ) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-            [location_description, user_id, create_date, resource_id, active]
+                active,
+                last_updated_by
+            ) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
+            [location_description, user_id, create_date, resource_id, active, last_updated_by]
         );
+
         res.status(201).json(result.rows[0]);
     } catch (error) {
         console.error("Error processing loan:", error);
         res.status(500).json({ error: "Internal server error" });
     }
 });
+
+
 
 //on-loan locations
 app.post("/api/locations_onloan/return", async (req, res) => {
