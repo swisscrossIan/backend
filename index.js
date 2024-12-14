@@ -723,3 +723,21 @@ app.post('/api/update_location', async (req, res) => {
     }
 });
 
+app.get("/api/resource_repairs", async (req, res) => {
+    try {
+        const result = await pool.query(`
+            SELECT 
+                rr.repair_id, 
+                rr.repair_number, 
+                rr.resource_id, 
+                rr.repair_notes, 
+                rr.repair_status, 
+                rr.date_start 
+            FROM resource_repairs rr
+        `);
+        res.json(result.rows);
+    } catch (error) {
+        console.error("Error fetching resource repairs:", error);
+        res.status(500).json({ error: "Failed to fetch resource repairs." });
+    }
+});
