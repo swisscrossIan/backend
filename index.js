@@ -771,3 +771,32 @@ app.put("/api/resource_repairs/:repairId", async (req, res) => {
         res.status(500).json({ error: "Failed to update repair status" });
     }
 });
+
+app.put("/api/resource_repairs/:repairId/notes", async (req, res) => {
+    const { repairId } = req.params;
+    const { repair_notes, last_updated_by } = req.body;
+
+    if (!repair_notes || !last_updated_by) {
+        return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    try {
+        const result = await pool.query(
+            `UPDATE resource_repairs
+             SET repair_notes = $1, last_updated_by = $2
+             WHERE repair_id = $3
+             RETURNING *`,
+            [repair_notes, last_updated_by, repairId]
+        );
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ error: "Repair not found" });
+        }
+
+        res.json(result.rows[0]);
+    } catch (error) {
+        console.error("Error updating repair note:", error);
+        res.status(500).json({ error: "Failed to update repair note" });
+    }
+});
+
