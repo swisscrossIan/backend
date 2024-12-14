@@ -734,9 +734,8 @@ app.get("/api/resource_repairs", async (req, res) => {
                 rr.repair_notes, 
                 rr.repair_status, 
                 rr.date_start, 
-                rr.last_updated 
             FROM resource_repairs rr
-            ORDER BY rr.last_updated DESC
+            ORDER BY rr.date_start DESC
         `);
         res.json(result.rows);
     } catch (error) {
