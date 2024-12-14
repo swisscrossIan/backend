@@ -723,6 +723,7 @@ app.post('/api/update_location', async (req, res) => {
     }
 });
 
+//resource repair code
 app.get("/api/resource_repairs", async (req, res) => {
     try {
         const result = await pool.query(`
@@ -739,5 +740,34 @@ app.get("/api/resource_repairs", async (req, res) => {
     } catch (error) {
         console.error("Error fetching resource repairs:", error);
         res.status(500).json({ error: "Failed to fetch resource repairs." });
+    }
+});
+
+//when repair status is update in table
+app.put("/api/resource_repairs/:repairId", async (req, res) => {
+    const { repairId } = req.params;
+    const { repair_status, last_updated_by } = req.body;
+
+    if (!repair_status || !last_updated_by) {
+        return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    try {
+        const result = await pool.query(
+            `UPDATE resource_repairs
+             SET repair_status = $1, last_updated_by = $2
+             WHERE repair_id = $3
+             RETURNING *`,
+            [repair_status, last_updated_by, repairId]
+        );
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ error: "Repair not found" });
+        }
+
+        res.json(result.rows[0]);
+    } catch (error) {
+        console.error("Error updating repair status:", error);
+        res.status(500).json({ error: "Failed to update repair status" });
     }
 });
