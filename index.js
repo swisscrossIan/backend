@@ -801,3 +801,80 @@ app.put("/api/resource_repairs/:repairId/notes", async (req, res) => {
     }
 });
 
+app.get('/api/resource_requests', async (req, res) => {
+    try {
+        const result = await pool.query(`
+            SELECT 
+                rr.resource_id, 
+                rr.request_list_id, 
+                rr.active, 
+                rl.user_request, 
+                rl.date_start, 
+                rl.request_note, 
+                rl.anytime
+            FROM resource_requests rr
+            JOIN request_list rl ON rr.request_list_id = rl.request_list_id
+        `);
+        res.json(result.rows);
+    } catch (error) {
+        console.error('Error fetching resource requests:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.put('/api/resource_requests/:requestListId/notes', async (req, res) => {
+    const { requestListId } = req.params;
+    const { request_note } = req.body;
+
+    if (!request_note) {
+        return res.status(400).json({ error: 'Missing request note' });
+    }
+
+    try {
+        const result = await pool.query(
+            `UPDATE request_list
+             SET request_note = $1
+             WHERE request_list_id = $2
+             RETURNING *`,
+            [request_note, requestListId]
+        );
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ error: 'Request not found' });
+        }
+
+        res.json(result.rows[0]);
+    } catch (error) {
+        console.error('Error updating request note:', error);
+        res.status(500).json({ error: 'Failed to update request note' });
+    }
+});
+
+app.put('/api/resource_requests/:requestListId/active', async (req, res) => {
+    const { requestListId } = req.params;
+    const { active } = req.body;
+
+    if (typeof active !== 'boolean') {
+        return res.status(400).json({ error: 'Invalid active status' });
+    }
+
+    try {
+        const result = await pool.query(
+            `UPDATE resource_requests
+             SET active = $1
+             WHERE request_list_id = $2
+             RETURNING *`,
+            [active, requestListId]
+        );
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ error: 'Request not found' });
+        }
+
+        res.json(result.rows[0]);
+    } catch (error) {
+        console.error('Error toggling active status:', error);
+        res.status(500).json({ error: 'Failed to toggle active status' });
+    }
+});
+
