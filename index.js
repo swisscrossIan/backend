@@ -805,13 +805,13 @@ app.get('/api/resource_requests', async (req, res) => {
     try {
         const result = await pool.query(`
             SELECT 
-                rr.resource_id, 
                 rr.request_list_id, 
+                rr.resource_id, 
                 rr.active, 
                 rl.user_request, 
                 rl.date_start, 
-                rl.request_note, 
-                rl.anytime
+                rl.anytime, 
+                rl.request_note
             FROM resource_requests rr
             JOIN request_list rl ON rr.request_list_id = rl.request_list_id
         `);
@@ -821,6 +821,7 @@ app.get('/api/resource_requests', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+
 
 app.put('/api/resource_requests/:requestListId/notes', async (req, res) => {
     const { requestListId } = req.params;
